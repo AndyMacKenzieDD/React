@@ -18,6 +18,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.25.0/babel.min.js"></script>
      
    <script type="text/babel">
+    class Hello extends React.Component {
+        render() {
+            return <h1>Hello, React</h1>;
+        }
+    }
     const userClassName = "user-info";
     const user = {
         id : 0,
@@ -30,6 +35,8 @@
     };
     ReactDOM.render(
         <div id={user.id} className={userClassName}  style={{color:'red', fontFamily:'Verdana'}}>
+	        <Hello/>
+
             <p>Full name: {user.getFullName()}</p>
             <p>Age: {user.age}</p>
             <p>Data generation time: {new Date().toLocaleTimeString()}</p>
