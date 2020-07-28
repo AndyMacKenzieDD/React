@@ -3,46 +3,13 @@
 <head>
     <meta charset="utf-8" />
     <title>Hello React</title>
-	<style>
-        .user-info{
-            padding: 10px;
-            border: 1px #ccc solid;
-        }
-    </style>
 </head>
 <body>
-    <div id="app"> </div>
+    <div id="app"></div>
       
     <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.25.0/babel.min.js"></script>
-     
-   <script type="text/babel">
-    class Hello extends React.Component {
-        render() {
-            return <h1>Hello, React</h1>;
-        }
-    }
-    const userClassName = "user-info";
-    const user = {
-        id : 0,
-        age: 25,
-        firstName: 'Tom',
-        lastName: 'Smith',
-        getFullName: function(){ 
-            return `${this.firstName} ${this.lastName}`;
-        }
-    };
-    ReactDOM.render(
-        <div id={user.id} className={userClassName}  style={{color:'red', fontFamily:'Verdana'}}>
-	        <Hello/>
-
-            <p>Full name: {user.getFullName()}</p>
-            <p>Age: {user.age}</p>
-            <p>Data generation time: {new Date().toLocaleTimeString()}</p>
-        </div>,
-        document.getElementById("app")
-    )
-   </script>
+    <script type="text/babel" src="index.jsx"></script>
 </body>
 </html>
