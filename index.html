@@ -2,52 +2,50 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Hello React</title>
-    <style>
-        button{
-            width: 100px;
-            height:30px;
-            border-radius: 4px;
-            margin:50px;
-        }
-        .on{
-            color:#666;
-            background-color: #ccc;
-        }
-        .off{
-            color:#888;
-            background-color: white;
-        }
-    </style>
+    <title>Forms in React</title>
 </head>
 <body>
     <div id="app"></div>
-      
+        
     <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.25.0/babel.min.js"></script>
+        
     <script type="text/babel">
-        class ClickButton extends React.Component {
-             
-           constructor(props) {
-               super(props);
-               this.state = {class: "off", label: "Click"};
-                 
-               this.press = this.press.bind(this);
-           }
-           press(){
-               let className = (this.state.class==="off")?"on":"off";
-               this.setState({class: className});
-           }
-           render() {
-               return <button onClick={this.press} className={this.state.class}>{this.state.label}</button>;
-           }
-       }
-         
-       ReactDOM.render(
-           <ClickButton />,
-           document.getElementById("app")
-       )
+    class UserForm extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {name: ""};
+   
+        this.onChange = this.onChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+      }
+      onChange(e) {
+        var val = e.target.value;
+        this.setState({name: val});
+    }
+   
+      handleSubmit(e) {
+        e.preventDefault();
+        alert("Name: " + this.state.name);
+      }
+   
+      render() {
+        return (
+            <form onSubmit={this.handleSubmit}>
+                <p>
+                    <label>Name:</label><br />
+                    <input type="text" value={this.state.name} onChange={this.onChange}/>
+                </p>
+                <input type="submit" value="Send" />
+            </form>
+        );
+      }
+    }
+    ReactDOM.render(
+        <UserForm />,
+        document.getElementById("app")
+    )
     </script>
 </body>
 </html>
