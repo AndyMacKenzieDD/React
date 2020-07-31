@@ -2,90 +2,45 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Forms in React</title>
+    <title>Routs in React</title>
 </head>
 <body>
     <div id="app"></div>
-      
+         
     <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/react-router-dom/umd/react-router-dom.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.25.0/babel.min.js"></script>
-      
+         
     <script type="text/babel">
-    class NameField extends React.Component {
-        constructor(props) {
-            super(props);
-            var isValid = this.validate(props.value);
-            this.state = {value: props.value, valid: isValid};
-            this.onChange = this.onChange.bind(this);
+    const Router = ReactRouterDOM.BrowserRouter;
+    const Route = ReactRouterDOM.Route;
+    const Switch = ReactRouterDOM.Switch;
+        
+    class About extends React.Component{
+        render(){
+            return <h2>About</h2>;
         }
-        validate(val){
-            return val.length>2;
-        }
-        onChange(e) {
-            var val = e.target.value;
-            var isValid = this.validate(val);
-            this.setState({value: val, valid: isValid});
-        }
-        render() {
-            var color = this.state.valid===true?"green":"red";
-            return <p>
-                <label>Name:</label><br />
-                <input type="text" value={this.state.value} onChange={this.onChange} style={{borderColor:color}} />
-            </p>;
-        }   
     }
-    class AgeField extends React.Component {
-       
-        constructor(props) {
-            super(props);
-            var isValid = this.validate(props.value);
-            this.state = {value: props.value, valid: isValid};
-            this.onChange = this.onChange.bind(this);
+    class NotFound extends React.Component{
+        render(){
+            return <h2>Not found</h2>;
         }
-        validate(val){
-            return val>=0;
-        }
-        onChange(e) {
-            var val = e.target.value;
-            var isValid = this.validate(val);
-            this.setState({value: val, valid: isValid});
-        }
-        render() {
-            var color = this.state.valid===true?"green":"red";
-            return <p>
-                <label>Age:</label><br />
-                <input type="number" value={this.state.value} onChange={this.onChange} style={{borderColor:color}} />
-            </p>;
-        }   
     }
-     
-    class UserForm extends React.Component {
-        constructor(props) {
-            super(props);
-            this.handleSubmit = this.handleSubmit.bind(this);
+      
+    class Main extends React.Component{
+        render(){
+            return <h2>Main</h2>;
         }
-        handleSubmit(e) {
-            e.preventDefault();
-            var name = this.refs.nameField.state.value;
-            var age = this.refs.ageField.state.value;
-            if(this.refs.nameField.state.valid && this.refs.ageField.state.valid){
-                alert("Name: " + name + " Age: " + age);
-            }
-        }
- 
-        render() {
-            return (
-                <form onSubmit={this.handleSubmit}>
-                <NameField value="" ref="nameField" />
-                <AgeField value="5" ref="ageField" />
-                <input type="submit" value="Send" />
-            </form>
-        );
-      }
     }
     ReactDOM.render(
-        <UserForm />,
+        <Router>
+            <Switch>
+                <Route exact path="/" component={Main} />
+                <Route path="/about" component={About} />
+                <Route component={NotFound} />
+            </Switch>
+        </Router>,
         document.getElementById("app")
     )
     </script>
